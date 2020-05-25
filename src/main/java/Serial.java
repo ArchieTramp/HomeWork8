@@ -8,9 +8,11 @@ public class Serial implements Serializable {
 
         Boardgame boardgame = new Boardgame();
 
-        System.out.println(boardgame.getClass());
+        BGStore bgStore = new BGStore();
 
         String write = printFields(boardgame);
+
+        write = write + printFields(bgStore);
 
 
         try (FileOutputStream out = new FileOutputStream("fileclass.txt");
@@ -22,21 +24,31 @@ public class Serial implements Serializable {
             System.out.println(ex.getMessage());
         }
 
+        FileReader fileReader = new FileReader("fileclass.txt");
+        File f = new File("fileclass.txt");
+        int f2 = (int) f.length();
+        char [] a = new char[f2];
+        fileReader.read(a);
+        for(char c : a)
+            System.out.print(c);
+        fileReader.close();
+
     }
 
 
 
-    private static String printFields(Boardgame boardgame) throws IllegalAccessException {
+    private static String printFields(Object boardgame) throws IllegalAccessException {
         Field[] fields = boardgame.getClass().getDeclaredFields();
+        String text = boardgame.getClass() + "\r\n";
         for (Field declaredField : fields) {
-            System.out.print(
+            text = text + (
                     Modifier.toString(declaredField.getModifiers()) + " " +
                             declaredField.getType().getSimpleName() + " " +
                             declaredField.getName() + ": ");
             declaredField.setAccessible(true);
-            System.out.println(declaredField.get(boardgame));
+            text = text + (declaredField.get(boardgame)) + "\r\n";
         }
-        return String.valueOf(fields);
+        return text;
     }
 
 }
