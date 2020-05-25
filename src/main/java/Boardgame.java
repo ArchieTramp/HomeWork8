@@ -1,5 +1,5 @@
 public class Boardgame {
-    private static String difficulty = "Hard";
+    private String difficulty = "Hard";
     private String name = "Monopoly";
     private final int cost = 1500;
     protected double victoryChance = 1.04;
