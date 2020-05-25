@@ -1,3 +1,11 @@
+/**
+ * Класс для сериализации
+ * с полями разных типов, в том числе
+ * ссылочным полем на другой класс.
+ *
+ * @author Artur Gilyazov
+ */
+
 public class Boardgame {
     private String difficulty = "Hard";
     private String name = "Monopoly";

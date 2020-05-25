@@ -1,6 +1,17 @@
+/**
+ * Сериализация класса и его полей,
+ * в том числе ссылочных,
+ * в файл и его десериализация
+ * из этого файла с выводом в консоль.
+ *
+ * @author Artur Gilyazov
+ */
+
 import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+
+/** Класс для осуществления сериализации других классов*/
 
 public class Serial implements Serializable {
     public static void main(String[] args) throws IllegalAccessException, IOException {
@@ -27,15 +38,15 @@ public class Serial implements Serializable {
         FileReader fileReader = new FileReader("fileclass.txt");
         File f = new File("fileclass.txt");
         int f2 = (int) f.length();
-        char [] a = new char[f2];
+        char[] a = new char[f2];
         fileReader.read(a);
-        for(char c : a)
+        for (char c : a)
             System.out.print(c);
         fileReader.close();
 
     }
 
-
+    /** метод, сериализующий класс и его поля */
 
     private static String printFields(Object boardgame) throws IllegalAccessException {
         Field[] fields = boardgame.getClass().getDeclaredFields();
