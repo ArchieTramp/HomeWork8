@@ -11,7 +11,9 @@ import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-/** Класс для осуществления сериализации других классов*/
+/**
+ * Класс для осуществления сериализации других классов
+ */
 
 public class Serial implements Serializable {
     public static void main(String[] args) throws IllegalAccessException, IOException {
@@ -35,18 +37,11 @@ public class Serial implements Serializable {
             System.out.println(ex.getMessage());
         }
 
-        FileReader fileReader = new FileReader("fileclass.txt");
-        File f = new File("fileclass.txt");
-        int f2 = (int) f.length();
-        char[] a = new char[f2];
-        fileReader.read(a);
-        for (char c : a)
-            System.out.print(c);
-        fileReader.close();
-
     }
 
-    /** метод, сериализующий класс и его поля */
+    /**
+     * метод, сериализующий класс и его поля
+     */
 
     private static String printFields(Object boardgame) throws IllegalAccessException {
         Field[] fields = boardgame.getClass().getDeclaredFields();
@@ -54,7 +49,7 @@ public class Serial implements Serializable {
         for (Field declaredField : fields) {
             text = text + (
                     Modifier.toString(declaredField.getModifiers()) + " " +
-                            declaredField.getType().getSimpleName() + " " +
+//                            declaredField.getType().getSimpleName() + " " +
                             declaredField.getName() + ": ");
             declaredField.setAccessible(true);
             text = text + (declaredField.get(boardgame)) + "\r\n";
